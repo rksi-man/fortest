@@ -1,0 +1,24 @@
+version: '3'
+services:
+ db:
+   image: postgres:11.4-alpine
+   container_name: postgres
+   ports:
+     - 5432:5432
+   volumes:
+     - ./pg_data:/var/lib/postgresql/data/pgdata
+   environment:
+     POSTGRES_PASSWORD: 123
+     POSTGRES_DB: docker_test
+     PGDATA: /var/lib/postgresql/data/pgdata
+   restart: always
+ app:
+   image: vladkalambet/web-server
+   container_name: application
+   ports:
+     - 3000:80
+   environment:
+     POSTGRES_HOST: db
+   restart: always
+   links:
+     - db
