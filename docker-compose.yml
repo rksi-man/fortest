@@ -1,24 +1,29 @@
-version: '3'
+version: '3.1'
+
 services:
- db:
-   image: postgres:11.4-alpine
-   container_name: postgres
-   ports:
-     - 5432:5432
-   volumes:
-     - ./pg_data:/var/lib/postgresql/data/pgdata
-   environment:
-     POSTGRES_PASSWORD: 123
-     POSTGRES_DB: docker_test
-     PGDATA: /var/lib/postgresql/data/pgdata
-   restart: always
- app:
-   image: vladkalambet/web-server
-   container_name: application
-   ports:
-     - 3000:80
-   environment:
-     POSTGRES_HOST: db
-   restart: always
-   links:
-     - db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 82:8080
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 81:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  mysql:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
