@@ -1,29 +1,18 @@
 version: '3.1'
 
 services:
-
-  adminer:
-    image: adminer
+  db:
+    image: mariadb:10.3
     restart: always
     ports:
-      - 82:8080
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234567890
 
   phpmyadmin:
     image: phpmyadmin
     restart: always
     ports:
-      - 81:80
+      - 8080:80
     environment:
       - PMA_ARBITRARY=1
-
-  mysql:
-    image: mysql:5.6
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-
-  postgres:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: 123456
