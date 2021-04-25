@@ -1,0 +1,1 @@
+docker run --name joomla_natural -e JOOMLA_DB_HOST=localhost:3306 -e JOOMLA_DB_USER=root-e JOOMLA_DB_PASSWORD=1234 -d -p 1236:80 joomla
